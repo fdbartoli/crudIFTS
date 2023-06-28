@@ -11,11 +11,9 @@ app.use(express.json());
 app.use('/api/items', itemsRouter);
 
 app.get('/', (req, res) => {
-    res.send('Hola mundo!');
+  res.send('Hola mundo!');
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
-
-
