@@ -3,7 +3,7 @@ const ItemsModel = require('../models/itemsModel.js');
 //Metodo para crear un item
 exports.createItem = async (req, res) => {
   try {
-    const item = new ItemsModel(req.body);
+    let item = new ItemsModel(req.body);
     item = await item.save();
     res.json({ message: 'Item creado con éxito' });
   } catch (error) {
