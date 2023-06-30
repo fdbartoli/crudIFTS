@@ -23,6 +23,7 @@ const itemsSchema = mongoose.Schema(
       required: true,
     },
   },
+  { timestamps: true },
   { versionKey: false }
 );
 
