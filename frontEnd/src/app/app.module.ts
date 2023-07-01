@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReservaComponent } from './reserva/reserva.component';
 import { ShowItemComponent } from './components/show-item/show-item.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReservaComponent,
-    ShowItemComponent
+    ShowItemComponent,
+    NavbarComponent,
+    NosotrosComponent
   ],
   imports: [
     BrowserModule,
