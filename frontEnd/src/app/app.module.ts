@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ShowItemComponent } from './components/show-item/show-item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
