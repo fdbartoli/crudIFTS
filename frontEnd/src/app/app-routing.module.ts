@@ -7,8 +7,8 @@ import { EditarAgregarItemComponent } from './components/editar-agregar-item/edi
 const routes: Routes = [
   { path: '', component: ShowItemComponent },
   { path: 'nosotros', component: NosotrosComponent },
-  { path: 'add', component: EditarAgregarItemComponent },
-  { path: 'add/:id', component: EditarAgregarItemComponent },
+  { path: 'item', component: EditarAgregarItemComponent },
+  { path: 'item/:id', component: EditarAgregarItemComponent },
   { path: '**', redirectTo: '' },
 ];
 

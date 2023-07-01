@@ -39,7 +39,7 @@ exports.updateItemById = async (req, res) => {
   try {
     const { descripcion, cantidadDePersonas, precio, checkIn, checkOut } =
       req.body;
-    const item = await ItemsModel.findById(req.params.id);
+    let item = await ItemsModel.findById(req.params.id);
     if (!item) {
       res.status(404).json({ message: 'No existe el Item' });
     }
