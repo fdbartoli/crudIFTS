@@ -22,7 +22,9 @@ export class EditarAgregarItemComponent implements OnInit {
     private router: Router,
     private crudService: CrudService,
     private actRouter: ActivatedRoute
-  ) {    
+  ) 
+  
+  {    
     this.itemForm = this.formBuilder.group({
       descripcion: ['', Validators.required],
       cantidadDePersonas: ['', Validators.required],
@@ -32,6 +34,7 @@ export class EditarAgregarItemComponent implements OnInit {
     });
     this.id = this.actRouter.snapshot.paramMap.get('id');
   }
+  
 
   agregarItem() {
     const ITEM: Item = {
@@ -41,24 +44,32 @@ export class EditarAgregarItemComponent implements OnInit {
       checkIn: this.itemForm.get('checkIn')?.value,
       checkOut: this.itemForm.get('checkOut')?.value,
     };
-
-    this.crudService.postItem(ITEM).subscribe({
-      next: (data) => {
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.log(err);
-        this.itemForm.reset();
-      },
-    });
+    if (this.id !== null) {
+      this.crudService.editItem(this.id, ITEM).subscribe({
+        next: (data) => {
+          this.router.navigate(['/']);
+        },
+      });
+    } 
+    else {
+      console.log(ITEM);
+      this.crudService.postItem(ITEM).subscribe({
+        next: (data) => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.log(err);
+          this.itemForm.reset();
+        },
+      });
+    }
   }
 
   esEditar() {
     if (this.id !== null) {
       console.log(this.id);
       this.titulo = 'Editar Item';
-      this.textoBoton = 'Editar'
-      this.esEditarBoton = true;
+      this.textoBoton = 'Editar';
       this.crudService.getItemById(this.id).subscribe({
         next: (data) => {
           this.itemForm.setValue({
