@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { CrudService } from 'src/app/services/crud.service';
+import { Item } from './../../models/item';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Item } from 'src/app/models/item';
-import { CrudService } from 'src/app/services/crud.service';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
   selector: 'app-editar-agregar-item',
   templateUrl: './editar-agregar-item.component.html',
@@ -11,15 +13,17 @@ import { CrudService } from 'src/app/services/crud.service';
 export class EditarAgregarItemComponent implements OnInit {
   itemForm: FormGroup;
   id: string | null;
-  titulo: string = 'Agregar Item';
+  titulo: string = 'Crear Item';
+  textoBoton: string = 'Guardar';
+  esEditarBoton: boolean = false
+
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private crudService: CrudService,
     private actRouter: ActivatedRoute
-  ) {
-    //importamos router para que cuando le dams aceptar vuelva a la ruta raiz
-    this.itemForm = this.fb.group({
+  ) {    
+    this.itemForm = this.formBuilder.group({
       descripcion: ['', Validators.required],
       cantidadDePersonas: ['', Validators.required],
       precio: ['', Validators.required],
@@ -28,9 +32,7 @@ export class EditarAgregarItemComponent implements OnInit {
     });
     this.id = this.actRouter.snapshot.paramMap.get('id');
   }
-  ngOnInit(): void {
-    this.esEditar();
-  }
+
   agregarItem() {
     const ITEM: Item = {
       descripcion: this.itemForm.get('descripcion')?.value,
@@ -39,29 +41,24 @@ export class EditarAgregarItemComponent implements OnInit {
       checkIn: this.itemForm.get('checkIn')?.value,
       checkOut: this.itemForm.get('checkOut')?.value,
     };
-    if (this.id !== null) {
-      this.crudService.editItem(this.id, ITEM).subscribe({
-        next: (data) => {
-          this.router.navigate(['/']);
-        },
-      });
-    } else {
-      console.log(ITEM);
-      this.crudService.postItem(ITEM).subscribe({
-        next: (data) => {
-          console.log('producto registrado');
-          this.router.navigate(['/']); //con esto vuelve a la ruta raiz
-        },
-        error: (err) => {
-          console.log(err);
-          this.itemForm.reset();
-        },
-      });
-    }
+
+    this.crudService.postItem(ITEM).subscribe({
+      next: (data) => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.log(err);
+        this.itemForm.reset();
+      },
+    });
   }
+
   esEditar() {
     if (this.id !== null) {
+      console.log(this.id);
       this.titulo = 'Editar Item';
+      this.textoBoton = 'Editar'
+      this.esEditarBoton = true;
       this.crudService.getItemById(this.id).subscribe({
         next: (data) => {
           this.itemForm.setValue({
@@ -70,12 +67,17 @@ export class EditarAgregarItemComponent implements OnInit {
             precio: data.precio,
             checkIn: data.checkIn,
             checkOut: data.checkOut,
-          });
+          }
+          );
         },
         error: (err) => {
           console.log(err);
         },
       });
     }
+  }
+
+  ngOnInit(): void {
+    this.esEditar();
   }
 }

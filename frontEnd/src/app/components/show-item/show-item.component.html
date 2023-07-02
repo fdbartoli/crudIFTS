@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <tr class="table-light" *ngFor="let item of listItem">
-        <td>{{ item.descripcion }}</td>
+        <td>{{ item.descripcion | titlecase }}</td>
         <td>{{ item.cantidadDePersonas }}</td>
         <td>{{ item.precio | currency }}</td>
         <td>{{ item.checkIn }}</td>
