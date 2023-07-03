@@ -15,7 +15,6 @@ export class EditarAgregarItemComponent implements OnInit {
   id: string | null;
   titulo: string = 'Crear Item';
   textoBoton: string = 'Guardar';
-  esEditarBoton: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
