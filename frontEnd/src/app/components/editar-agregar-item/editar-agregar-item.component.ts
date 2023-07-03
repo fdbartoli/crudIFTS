@@ -15,16 +15,14 @@ export class EditarAgregarItemComponent implements OnInit {
   id: string | null;
   titulo: string = 'Crear Item';
   textoBoton: string = 'Guardar';
-  esEditarBoton: boolean = false
+  esEditarBoton: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private crudService: CrudService,
     private actRouter: ActivatedRoute
-  ) 
-  
-  {    
+  ) {
     this.itemForm = this.formBuilder.group({
       descripcion: ['', Validators.required],
       cantidadDePersonas: ['', Validators.required],
@@ -34,7 +32,6 @@ export class EditarAgregarItemComponent implements OnInit {
     });
     this.id = this.actRouter.snapshot.paramMap.get('id');
   }
-  
 
   agregarItem() {
     const ITEM: Item = {
@@ -50,8 +47,7 @@ export class EditarAgregarItemComponent implements OnInit {
           this.router.navigate(['/']);
         },
       });
-    } 
-    else {
+    } else {
       console.log(ITEM);
       this.crudService.postItem(ITEM).subscribe({
         next: (data) => {
@@ -78,8 +74,7 @@ export class EditarAgregarItemComponent implements OnInit {
             precio: data.precio,
             checkIn: data.checkIn,
             checkOut: data.checkOut,
-          }
-          );
+          });
         },
         error: (err) => {
           console.log(err);

@@ -1,5 +1,5 @@
 <div class="container card mt-5">
-  <h1 class="text-center mt-4">{{ titulo }}</h1>
+  <h1 class="text-center mt-4 fw-bold">{{ titulo }}</h1>
   <form [formGroup]="itemForm" (ngSubmit)="agregarItem()" class="mt-3 p-5">
     <input
       type="text"
@@ -46,7 +46,7 @@
         class="btn btn-secondary mt-5 me-3"
         [disabled]="!itemForm.valid"
       >
-        {{textoBoton}}
+        {{ textoBoton }}
       </button>
 
       <button routerLink="/" type="button" class="btn btn-secondary mt-5">

@@ -1,5 +1,13 @@
 <div class="container">
-  <table class="table table-hover table-dark mt-3">
+  <h1 class="my-4 fw-bold">Cabañas Mongote</h1>
+  <p class="fs-5 mb-4">
+    Esta aplicación permite gestionar las reservas de los clientes, mostrando
+    información clave como las fechas de ingreso y egreso. Otros datos que se
+    pueden visualizar incluyen la descripción de la cabaña, la capacidad de
+    personas que puede alojar, y el precio correspondiente. Otras
+    funcionalidades que posee, son las de: agregar, eliminar y editar cabañas.
+  </p>
+  <table class="table table-hover table-dark mt-3 fs-5">
     <thead>
       <tr>
         <th scope="col">Descripcion</th>
@@ -15,8 +23,8 @@
         <td>{{ item.descripcion | titlecase }}</td>
         <td>{{ item.cantidadDePersonas }}</td>
         <td>{{ item.precio | currency }}</td>
-        <td>{{ item.checkIn }}</td>
-        <td>{{ item.checkOut }}</td>
+        <td>{{ item.checkIn | date : "dd/MM/yyyy" }}</td>
+        <td>{{ item.checkOut | date : "dd/MM/yyyy" }}</td>
         <td>
           <button
             type="button"
