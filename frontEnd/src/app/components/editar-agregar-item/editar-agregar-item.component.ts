@@ -47,7 +47,6 @@ export class EditarAgregarItemComponent implements OnInit {
         },
       });
     } else {
-      console.log(ITEM);
       this.crudService.postItem(ITEM).subscribe({
         next: (data) => {
           this.router.navigate(['/']);
